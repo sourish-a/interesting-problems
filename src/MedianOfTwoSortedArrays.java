@@ -38,6 +38,10 @@ public class MedianOfTwoSortedArrays {
         return merged;
     }
 
+    public static double attempt2(int[] nums1, int[] nums2) {
+        return 0.0;
+    }
+
     public static void main(String[] args) {
         int[] one = new int[]{1, 3};
         int[] two = new int[]{2};
