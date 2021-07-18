@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -165,5 +166,41 @@ public class ThreeSum {
             }
         }
         return rval;
+    }
+
+    /**
+     * Code cleanup a bit. Trying to further reduce # of iterations by updating left and right more efficiently
+     */
+    public static List<List<Integer>> attempt5(int[] nums) {
+        List<List<Integer>> rval = new LinkedList<>();
+        if (nums.length < 3) return rval;
+        Arrays.sort(nums);
+        int outerPrev = nums[0] + 1;
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] == outerPrev) continue;
+            outerPrev = nums[i];
+            int target = 0 - nums[i], left = i + 1, right = nums.length - 1;
+            while (left < right) {
+                int sum = nums[left] + nums[right];
+                if (sum == target) {
+                    rval.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                    while (left < right && nums[left] == nums[left+1]) left++;
+                    while (left < right && nums[right] == nums[right-1]) right--;
+                    left++; right--;
+                } else if (sum < target) {
+                    left++;
+                } else {
+                    right--;
+                }
+            }
+        }
+        return rval;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {-2, 0, 0, 2, 2};
+        int[] nums2 = {};
+        int[] nums3 = {-1, -1, 0, 1};
+        System.out.println(attempt5(nums1));
     }
 }
