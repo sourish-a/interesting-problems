@@ -12,6 +12,8 @@ public class LengthOfLongestSubstring {
      * Key Idea: The sliding window. After you hit a repeat character, update the starting index to the next valid start.
      * Good for checking constraints with consecutive values (like a substring).
      */
+
+    
     public static int attempt1(String s) {
         Set<Character> chars = new HashSet<>();
         Queue<Character> substrings = new LinkedList<>();
